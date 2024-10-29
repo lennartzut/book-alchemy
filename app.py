@@ -17,10 +17,20 @@ db.init_app(app)
 @app.route('/')
 def home():
     sort_by = request.args.get('sort_by', 'title')
+    search_query = request.args.get('search_query', '')
+    query = Book.query.join(Author)
+
+    if search_query:
+        query = query.filter(
+            (Book.title.ilike(f"%{search_query}%")) |
+            (Author.name.ilike(f"%{search_query}%"))
+        )
+
     if sort_by == 'author':
-        books = Book.query.join(Author).order_by(Author.name).all()
+        query = query.order_by(Author.name)
     else:
-        books = Book.query.order_by(Book.title).all()
+        query = query.order_by(Book.title)
+    books = query.all()
 
     for book in books:
         if book.isbn:
@@ -28,7 +38,8 @@ def home():
         else:
             book.cover_image_url = "/static/images/default_cover.jpg"
 
-    return render_template('home.html', books=books, sort_by=sort_by)
+    return render_template('home.html', books=books, sort_by=sort_by,
+                           search_query=search_query)
 
 
 @app.route('/add_author', methods=['GET', 'POST'])
