@@ -1,16 +1,34 @@
 import os
-from flask import Flask, redirect, render_template, request, url_for, \
-    flash
+from flask import (Flask, redirect, render_template, request,
+                   url_for, flash)
 from flask_sqlalchemy import SQLAlchemy
 from datetime import datetime
+import requests
 from data_models import db, Author, Book
 
 app = Flask(__name__)
 app.config[
     'SQLALCHEMY_DATABASE_URI'] = f"sqlite:///{os.path.abspath('data/library.sqlite')}"
 app.config['SQLALCHEMY_TRACK_MODIFICATIONS'] = False
-app.secret_key = 'your_secret_key'  # Needed for flash messages
+app.secret_key = 'leo'
 db.init_app(app)
+
+
+@app.route('/')
+def home():
+    sort_by = request.args.get('sort_by', 'title')
+    if sort_by == 'author':
+        books = Book.query.join(Author).order_by(Author.name).all()
+    else:
+        books = Book.query.order_by(Book.title).all()
+
+    for book in books:
+        if book.isbn:
+            book.cover_image_url = f"https://covers.openlibrary.org/b/isbn/{book.isbn}-L.jpg"
+        else:
+            book.cover_image_url = "/static/images/default_cover.jpg"
+
+    return render_template('home.html', books=books, sort_by=sort_by)
 
 
 @app.route('/add_author', methods=['GET', 'POST'])

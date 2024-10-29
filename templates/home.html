@@ -1,16 +1,32 @@
 <!DOCTYPE html>
 <html lang="en">
-  <head>
+<head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
-  </head>
-  <body>
+    <title>Library</title>
+</head>
+<body>
+    <h1>My Library</h1>
 
-    {% for book in books %}
-    <div> <h3>{{ book.title }}</h3>
+    <form action="/" method="get">
+        <label for="sort_by">Sort by:</label>
+        <select name="sort_by" id="sort_by" onchange="this.form.submit()">
+            <option value="title" {% if sort_by == 'title' %}selected{% endif %}>Title</option>
+            <option value="author" {% if sort_by == 'author' %}selected{% endif %}>Author</option>
+        </select>
+    </form>
+
+    <div>
+        {% for book in books %}
+            <div style="display: flex; align-items: center; margin-bottom: 20px;">
+                <img src="{{ book.cover_image_url }}" alt="Book cover" style="width: 100px; height: auto; margin-right: 20px;">
+                <div>
+                    <h3>{{ book.title }}</h3>
+                    <p>by {{ book.author.name }}</p>
+                </div>
+            </div>
+        {% endfor %}
     </div>
-    {% endfor %}
-
-  </body>
+</body>
 </html>
