@@ -6,6 +6,46 @@
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
     <title>Library</title>
     <link rel="stylesheet" href="static/styles.css">
+    <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+    <script>
+        // JavaScript function to confirm deletion of book using SweetAlert2
+        function confirmDeleteBook(event) {
+            event.preventDefault(); // Prevent the default form submission
+
+            Swal.fire({
+                title: 'Are you sure?',
+                text: "You won't be able to revert this!",
+                icon: 'warning',
+                showCancelButton: true,
+                confirmButtonColor: '#d33',
+                cancelButtonColor: '#3085d6',
+                confirmButtonText: 'Yes, delete it!'
+            }).then((result) => {
+                if (result.isConfirmed) {
+                    event.target.submit(); // Submit the form if confirmed
+                }
+            });
+        }
+
+        // JavaScript function to confirm deletion of author using SweetAlert2
+        function confirmDeleteAuthor(event) {
+            event.preventDefault(); // Prevent the default form submission
+
+            Swal.fire({
+                title: 'Are you sure?',
+                text: "This will also delete all books by this author. You won't be able to revert this!",
+                icon: 'warning',
+                showCancelButton: true,
+                confirmButtonColor: '#d33',
+                cancelButtonColor: '#3085d6',
+                confirmButtonText: 'Yes, delete author!'
+            }).then((result) => {
+                if (result.isConfirmed) {
+                    event.target.submit(); // Submit the form if confirmed
+                }
+            });
+        }
+    </script>
 </head>
 <body>
     <div class="container">
@@ -48,13 +88,13 @@
                         <div class="book-info">
                             <div class="book-title-section">
                                 <h3 class="book-title">{{ book.title }}</h3>
-                                <form action="{{ url_for('delete_book', book_id=book.id) }}" method="POST" class="delete-book-form">
+                                <form action="{{ url_for('delete_book', book_id=book.id) }}" method="POST" class="delete-book-form" onsubmit="confirmDeleteBook(event)">
                                     <button type="submit" class="delete-button">Delete Book</button>
                                 </form>
                             </div>
                             <div class="book-author-section">
                                 <p class="book-author">by {{ book.author.name }}</p>
-                                <form action="{{ url_for('delete_author', author_id=book.author.id) }}" method="POST" class="delete-author-form">
+                                <form action="{{ url_for('delete_author', author_id=book.author.id) }}" method="POST" class="delete-author-form" onsubmit="confirmDeleteAuthor(event)">
                                     <button type="submit" class="delete-author-button">Delete Author</button>
                                 </form>
                             </div>
