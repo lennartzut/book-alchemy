@@ -11,6 +11,21 @@
     <div class="container">
         <h1 class="library-title">My Cozy Library</h1>
 
+        <div class="nav-buttons">
+            <a href="{{ url_for('add_author') }}" class="nav-button">Add Author</a>
+            <a href="{{ url_for('add_book') }}" class="nav-button">Add Book</a>
+        </div>
+
+        {% with messages = get_flashed_messages() %}
+          {% if messages %}
+            <div class="flash-messages">
+                {% for message in messages %}
+                  <p class="success-message">{{ message }}</p>
+                {% endfor %}
+            </div>
+          {% endif %}
+        {% endwith %}
+
         <form action="/" method="get" class="search-form">
             <label for="search_query">Search:</label>
             <input type="text" id="search_query" name="search_query" placeholder="Search by title or author" value="{{ search_query }}">
@@ -29,12 +44,20 @@
                 {% for book in books %}
                     <div class="book-item">
                         <img src="{{ book.cover_image_url }}" alt="Book cover" class="book-cover">
+
                         <div class="book-info">
-                            <h3 class="book-title">{{ book.title }}</h3>
-                            <p class="book-author">by {{ book.author.name }}</p>
-                            <form action="{{ url_for('delete_book', book_id=book.id) }}" method="POST">
-                                <button type="submit" class="delete-button">Delete Book</button>
-                            </form>
+                            <div class="book-title-section">
+                                <h3 class="book-title">{{ book.title }}</h3>
+                                <form action="{{ url_for('delete_book', book_id=book.id) }}" method="POST" class="delete-book-form">
+                                    <button type="submit" class="delete-button">Delete Book</button>
+                                </form>
+                            </div>
+                            <div class="book-author-section">
+                                <p class="book-author">by {{ book.author.name }}</p>
+                                <form action="{{ url_for('delete_author', author_id=book.author.id) }}" method="POST" class="delete-author-form">
+                                    <button type="submit" class="delete-author-button">Delete Author</button>
+                                </form>
+                            </div>
                         </div>
                     </div>
                 {% endfor %}

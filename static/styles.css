@@ -33,6 +33,30 @@ body {
     font-weight: bold;
 }
 
+/* Navigation buttons */
+.nav-buttons {
+    display: flex;
+    justify-content: space-around;
+    margin-bottom: 25px;
+}
+
+.nav-button {
+    background-color: #6a4c36;
+    color: #faf3e3;
+    padding: 12px 20px;
+    border: none;
+    border-radius: 6px;
+    text-decoration: none;
+    font-weight: bold;
+    cursor: pointer;
+    transition: background-color 0.3s ease, transform 0.2s ease;
+}
+
+.nav-button:hover {
+    background-color: #4e3626;
+    transform: scale(1.05);
+}
+
 /* Search form styling */
 .search-form {
     display: flex;
@@ -40,8 +64,8 @@ body {
     justify-content: space-between;
     margin-bottom: 25px;
     background-color: #e6d8b2;
-    padding: 10px;
-    border-radius: 6px;
+    padding: 15px;
+    border-radius: 8px;
 }
 
 .search-form label {
@@ -51,7 +75,7 @@ body {
 
 .search-form input[type="text"],
 .search-form select {
-    padding: 5px;
+    padding: 8px;
     font-size: 1em;
     border-radius: 4px;
     border: 1px solid #a0917b;
@@ -59,13 +83,14 @@ body {
 }
 
 .search-button {
-    padding: 5px 10px;
+    padding: 10px 20px;
     background-color: #6a4c36;
     color: #faf3e3;
     border: none;
-    border-radius: 4px;
+    border-radius: 6px;
     cursor: pointer;
     font-weight: bold;
+    transition: background-color 0.3s ease, transform 0.2s ease;
 }
 
 .search-button:hover {
@@ -74,33 +99,55 @@ body {
 
 /* Book list styling */
 .book-list {
-    margin-top: 15px;
+    margin-top: 20px;
 }
 
 .book-item {
     display: flex;
-    align-items: center;
-    padding: 15px;
-    margin-bottom: 15px;
+    align-items: flex-start;
+    padding: 20px;
+    margin-bottom: 20px;
     border-bottom: 1px solid #d4c4a8;
+    background-color: #f7f3e9;
+    border-radius: 6px;
 }
 
 .book-cover {
-    width: 80px;
+    width: 100px;
     height: auto;
     border-radius: 4px;
-    margin-right: 15px;
+    margin-right: 20px;
+    box-shadow: 2px 2px 5px rgba(0, 0, 0, 0.1);
 }
 
 .book-info {
     display: flex;
     flex-direction: column;
+    width: 100%;
+}
+
+.book-title-section {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
 }
 
 .book-title {
     font-size: 1.5em;
     color: #5a3e2b;
     margin-bottom: 5px;
+    font-weight: bold;
+}
+
+.delete-book-form {
+    margin-left: 20px;
+}
+
+.book-author-section {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    margin-top: 10px;
 }
 
 .book-author {
@@ -108,19 +155,39 @@ body {
     color: #6a4c36;
 }
 
-.delete-button {
-    background-color: #a64e4e;
-    color: #faf3e3;
-    border: none;
-    padding: 5px 10px;
-    font-size: 0.9em;
-    border-radius: 4px;
-    cursor: pointer;
-    margin-top: 10px;
+.delete-author-form {
+    margin-left: 20px;
 }
 
-.delete-button:hover {
-    background-color: #883737;
+/* Flash messages */
+.flash-messages {
+    background-color: #e8f5e9;
+    border: 1px solid #66bb6a;
+    padding: 15px;
+    margin: 20px 0;
+    border-radius: 6px;
+}
+
+.success-message {
+    color: #388e3c;
+    font-weight: bold;
+}
+
+/* Button Styling */
+button {
+    background-color: #6a4c36;
+    color: #faf3e3;
+    padding: 10px 15px;
+    border: none;
+    border-radius: 6px;
+    font-weight: bold;
+    cursor: pointer;
+    transition: background-color 0.3s ease, transform 0.2s ease;
+}
+
+button:hover {
+    background-color: #4e3626;
+    transform: scale(1.05);
 }
 
 /* No books message styling */
@@ -128,72 +195,88 @@ body {
     font-size: 1.2em;
     text-align: center;
     color: #4a3f35;
-    padding: 10px;
+    padding: 15px;
+    background-color: #faf3e3;
+    border-radius: 6px;
 }
 
-/* Flash messages */
-.flash-messages {
-    margin-bottom: 20px;
-    padding: 10px;
-    background-color: #e7f4e4;
-    border-left: 4px solid #6fa36f;
-    border-radius: 4px;
-}
 
-.success-message {
-    color: #4f8b4f;
-    font-weight: bold;
-    font-size: 1.1em;
-}
-
-/* Form styling */
-.book-form {
+.book-form,
+.author-form {
     display: flex;
     flex-direction: column;
-    padding: 20px;
+    padding: 25px;
     background-color: #faf3e3;
-    border: 1px solid #d4c4a8;
-    border-radius: 6px;
+    border: 2px solid #d4c4a8;
+    border-radius: 8px;
+    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
+    margin-top: 30px;
 }
 
 .form-label {
     font-weight: bold;
     color: #5a3e2b;
-    margin-bottom: 5px;
+    margin-bottom: 8px;
+    font-size: 1.2em;
 }
 
 .form-input,
 .form-select {
-    padding: 8px;
-    margin-bottom: 20px;
-    border-radius: 4px;
+    padding: 12px;
+    margin-bottom: 25px;
+    border-radius: 6px;
     border: 1px solid #a0917b;
-    font-size: 1em;
+    font-size: 1.1em;
     background-color: #fff;
+    transition: border-color 0.3s ease;
+}
+
+.form-input:focus,
+.form-select:focus {
+    border-color: #6a4c36;
+    outline: none;
 }
 
 .submit-button {
     background-color: #6a4c36;
     color: #faf3e3;
-    padding: 10px;
+    padding: 12px 20px;
     border: none;
-    border-radius: 4px;
+    border-radius: 8px;
     cursor: pointer;
     font-weight: bold;
     width: fit-content;
     align-self: center;
+    font-size: 1.1em;
+    transition: background-color 0.3s ease, transform 0.2s ease;
 }
 
 .submit-button:hover {
     background-color: #4e3626;
+    transform: scale(1.05);
 }
 
-/* Form styling for Add Author page */
-.author-form {
+/* Styling for navigation buttons to library */
+.nav-buttons {
     display: flex;
-    flex-direction: column;
-    padding: 20px;
-    background-color: #faf3e3;
-    border: 1px solid #d4c4a8;
+    justify-content: flex-start;
+    margin-bottom: 20px;
+}
+
+.nav-button {
+    background-color: #6a4c36;
+    color: #faf3e3;
+    padding: 12px 20px;
+    border: none;
     border-radius: 6px;
+    text-decoration: none;
+    font-weight: bold;
+    cursor: pointer;
+    transition: background-color 0.3s ease, transform 0.2s ease;
+    margin-right: 15px;
+}
+
+.nav-button:hover {
+    background-color: #4e3626;
+    transform: scale(1.05);
 }

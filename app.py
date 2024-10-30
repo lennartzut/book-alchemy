@@ -109,5 +109,15 @@ def delete_book(book_id):
     return redirect(url_for('home'))
 
 
+@app.route('/author/<int:author_id>/delete', methods=['POST'])
+def delete_author(author_id):
+    author = Author.query.get_or_404(author_id)
+    db.session.delete(author)
+    db.session.commit()
+
+    flash(f"Author '{author.name}' and all associated books were successfully deleted!")
+    return redirect(url_for('home'))
+
+
 if __name__ == '__main__':
     app.run(host="0.0.0.0", port=5002, debug=True)

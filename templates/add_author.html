@@ -11,6 +11,10 @@
     <div class="container">
         <h1 class="library-title">Add a New Author</h1>
 
+        <div class="nav-buttons">
+            <a href="{{ url_for('home') }}" class="nav-button">Go to Library</a>
+        </div>
+
         {% with messages = get_flashed_messages() %}
           {% if messages %}
             <div class="flash-messages">
@@ -23,13 +27,13 @@
 
         <form action="/add_author" method="POST" class="author-form">
             <label for="name" class="form-label">Author Name:</label>
-            <input type="text" id="name" name="name" required class="form-input"><br><br>
+            <input type="text" id="name" name="name" required class="form-input">
 
             <label for="birthdate" class="form-label">Birthdate:</label>
-            <input type="date" id="birthdate" name="birthdate" required class="form-input"><br><br>
+            <input type="date" id="birthdate" name="birthdate" required class="form-input">
 
             <label for="date_of_death" class="form-label">Date of Death:</label>
-            <input type="date" id="date_of_death" name="date_of_death" class="form-input"><br><br>
+            <input type="date" id="date_of_death" name="date_of_death" class="form-input">
 
             <input type="submit" value="Add Author" class="submit-button">
         </form>
