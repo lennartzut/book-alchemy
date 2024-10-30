@@ -16,6 +16,17 @@ db.init_app(app)
 
 @app.route('/')
 def home():
+    """
+    Retrieves the list of books, optionally filtered by a search
+    query and sorted either by book title or author name.
+
+    GET Parameters: sort_by (str): The field by which to sort the
+    books ('title' or 'author'). search_query (str): A search term
+    to filter books by title or author name.
+
+    Returns:
+        Rendered HTML page displaying the list of books.
+    """
     sort_by = request.args.get('sort_by', 'title')
     search_query = request.args.get('search_query', '')
     query = Book.query.join(Author)
@@ -44,6 +55,19 @@ def home():
 
 @app.route('/add_author', methods=['GET', 'POST'])
 def add_author():
+    """
+    Handles both GET and POST requests. On GET, renders a form to
+    add a new author. On POST, adds the new author to the database
+    and redirects back to the form.
+
+    POST Parameters: name (str): The name of the author. birthdate
+    (str): The birthdate of the author in 'YYYY-MM-DD' format.
+    date_of_death (str): The date of death of the author in
+    'YYYY-MM-DD' format (optional).
+
+    Returns: Redirect to the add_author page or renders the
+    add_author form.
+    """
     if request.method == 'POST':
         name = request.form['name']
         birthdate_str = request.form['birthdate']
@@ -67,6 +91,20 @@ def add_author():
 
 @app.route('/add_book', methods=['GET', 'POST'])
 def add_book():
+    """
+    Handles both GET and POST requests. On GET, renders a form to
+    add a new book. On POST, adds the new book to the database and
+    redirects back to the form.
+
+    POST Parameters:
+        title (str): The title of the book.
+        isbn (str): The ISBN of the book.
+        publication_year (str): The publication year of the book.
+        author_id (int): The ID of the author of the book.
+
+    Returns:
+        Redirect to the add_book page or renders the add_book form.
+    """
     if request.method == 'POST':
         title = request.form['title']
         isbn = request.form['isbn']
@@ -91,6 +129,13 @@ def add_book():
 
 @app.route('/book/<int:book_id>/delete', methods=['POST'])
 def delete_book(book_id):
+    """
+    Deletes a specific book. If the author has no more books,
+    deletes the author as well.
+
+    Returns:
+        Redirect to the home page after deletion.
+    """
     book = Book.query.get_or_404(book_id)
     author_id = book.author_id
 
@@ -111,6 +156,12 @@ def delete_book(book_id):
 
 @app.route('/author/<int:author_id>/delete', methods=['POST'])
 def delete_author(author_id):
+    """
+    Deletes a specific author, along with all their associated books.
+
+    Returns:
+        Redirect to the home page after deletion.
+    """
     author = Author.query.get_or_404(author_id)
     db.session.delete(author)
     db.session.commit()
