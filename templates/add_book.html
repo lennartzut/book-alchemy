@@ -4,36 +4,42 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Add Book</title>
+    <link rel="stylesheet" href="static/styles.css">
 </head>
 <body>
+    <div class="container">
+        <h1 class="library-title">Add a New Book</h1>
 
-{% with messages = get_flashed_messages() %}
-  {% if messages %}
-    {% for message in messages %}
-      <p style="color: green;">{{ message }}</p>
-    {% endfor %}
-  {% endif %}
-{% endwith %}
+        {% with messages = get_flashed_messages() %}
+          {% if messages %}
+            <div class="flash-messages">
+                {% for message in messages %}
+                  <p class="success-message">{{ message }}</p>
+                {% endfor %}
+            </div>
+          {% endif %}
+        {% endwith %}
 
-<form action="/add_book" method="POST">
-    <label for="title">Book Title:</label>
-    <input type="text" id="title" name="title" required><br><br>
+        <form action="/add_book" method="POST" class="book-form">
+            <label for="title" class="form-label">Book Title:</label>
+            <input type="text" id="title" name="title" required class="form-input"><br><br>
 
-    <label for="isbn">ISBN:</label>
-    <input type="text" id="isbn" name="isbn" required><br><br>
+            <label for="isbn" class="form-label">ISBN:</label>
+            <input type="text" id="isbn" name="isbn" required class="form-input"><br><br>
 
-    <label for="publication_year">Publication Year:</label>
-    <input type="number" id="publication_year" name="publication_year" required><br><br>
+            <label for="publication_year" class="form-label">Publication Year:</label>
+            <input type="number" id="publication_year" name="publication_year" required class="form-input"><br><br>
 
-    <label for="author">Author:</label>
-    <select id="author" name="author_id" required>
-        {% for author in authors %}
-            <option value="{{ author.id }}">{{ author.name }}</option>
-        {% endfor %}
-    </select><br><br>
+            <label for="author" class="form-label">Author:</label>
+            <select id="author" name="author_id" required class="form-select">
+                {% for author in authors %}
+                    <option value="{{ author.id }}">{{ author.name }}</option>
+                {% endfor %}
+            </select><br><br>
 
-    <input type="submit" value="Add Book">
-</form>
-
+            <input type="submit" value="Add Book" class="submit-button">
+        </form>
+    </div>
 </body>
 </html>

@@ -1,0 +1,199 @@
+/* Basic reset */
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+/* Body styling */
+body {
+    background-color: #f3efe0;
+    color: #4a3f35;
+    font-family: 'Georgia', serif;
+    padding: 20px;
+}
+
+/* Container styling */
+.container {
+    max-width: 800px;
+    margin: auto;
+    background-color: #faf3e3;
+    padding: 30px;
+    border-radius: 8px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+    border: 2px solid #d4c4a8;
+}
+
+/* Title styling */
+.library-title {
+    text-align: center;
+    font-size: 2.5em;
+    color: #5a3e2b;
+    margin-bottom: 20px;
+    font-weight: bold;
+}
+
+/* Search form styling */
+.search-form {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    margin-bottom: 25px;
+    background-color: #e6d8b2;
+    padding: 10px;
+    border-radius: 6px;
+}
+
+.search-form label {
+    margin-right: 10px;
+    font-weight: bold;
+}
+
+.search-form input[type="text"],
+.search-form select {
+    padding: 5px;
+    font-size: 1em;
+    border-radius: 4px;
+    border: 1px solid #a0917b;
+    background-color: #fff;
+}
+
+.search-button {
+    padding: 5px 10px;
+    background-color: #6a4c36;
+    color: #faf3e3;
+    border: none;
+    border-radius: 4px;
+    cursor: pointer;
+    font-weight: bold;
+}
+
+.search-button:hover {
+    background-color: #4e3626;
+}
+
+/* Book list styling */
+.book-list {
+    margin-top: 15px;
+}
+
+.book-item {
+    display: flex;
+    align-items: center;
+    padding: 15px;
+    margin-bottom: 15px;
+    border-bottom: 1px solid #d4c4a8;
+}
+
+.book-cover {
+    width: 80px;
+    height: auto;
+    border-radius: 4px;
+    margin-right: 15px;
+}
+
+.book-info {
+    display: flex;
+    flex-direction: column;
+}
+
+.book-title {
+    font-size: 1.5em;
+    color: #5a3e2b;
+    margin-bottom: 5px;
+}
+
+.book-author {
+    font-style: italic;
+    color: #6a4c36;
+}
+
+.delete-button {
+    background-color: #a64e4e;
+    color: #faf3e3;
+    border: none;
+    padding: 5px 10px;
+    font-size: 0.9em;
+    border-radius: 4px;
+    cursor: pointer;
+    margin-top: 10px;
+}
+
+.delete-button:hover {
+    background-color: #883737;
+}
+
+/* No books message styling */
+.no-books-message {
+    font-size: 1.2em;
+    text-align: center;
+    color: #4a3f35;
+    padding: 10px;
+}
+
+/* Flash messages */
+.flash-messages {
+    margin-bottom: 20px;
+    padding: 10px;
+    background-color: #e7f4e4;
+    border-left: 4px solid #6fa36f;
+    border-radius: 4px;
+}
+
+.success-message {
+    color: #4f8b4f;
+    font-weight: bold;
+    font-size: 1.1em;
+}
+
+/* Form styling */
+.book-form {
+    display: flex;
+    flex-direction: column;
+    padding: 20px;
+    background-color: #faf3e3;
+    border: 1px solid #d4c4a8;
+    border-radius: 6px;
+}
+
+.form-label {
+    font-weight: bold;
+    color: #5a3e2b;
+    margin-bottom: 5px;
+}
+
+.form-input,
+.form-select {
+    padding: 8px;
+    margin-bottom: 20px;
+    border-radius: 4px;
+    border: 1px solid #a0917b;
+    font-size: 1em;
+    background-color: #fff;
+}
+
+.submit-button {
+    background-color: #6a4c36;
+    color: #faf3e3;
+    padding: 10px;
+    border: none;
+    border-radius: 4px;
+    cursor: pointer;
+    font-weight: bold;
+    width: fit-content;
+    align-self: center;
+}
+
+.submit-button:hover {
+    background-color: #4e3626;
+}
+
+/* Form styling for Add Author page */
+.author-form {
+    display: flex;
+    flex-direction: column;
+    padding: 20px;
+    background-color: #faf3e3;
+    border: 1px solid #d4c4a8;
+    border-radius: 6px;
+}

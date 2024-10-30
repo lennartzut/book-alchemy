@@ -5,39 +5,43 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
     <title>Library</title>
+    <link rel="stylesheet" href="static/styles.css">
 </head>
 <body>
-    <h1>My Library</h1>
+    <div class="container">
+        <h1 class="library-title">My Cozy Library</h1>
 
-    <form action="/" method="get" style="margin-bottom: 20px;">
-        <label for="search_query">Search:</label>
-        <input type="text" id="search_query" name="search_query"
-               placeholder="Search by title or author" value="{{ search_query }}">
+        <form action="/" method="get" class="search-form">
+            <label for="search_query">Search:</label>
+            <input type="text" id="search_query" name="search_query" placeholder="Search by title or author" value="{{ search_query }}">
 
-        <label for="sort_by">Sort by:</label>
-        <select name="sort_by" id="sort_by" onchange="this.form.submit()">
-            <option value="title" {% if sort_by == 'title' %}selected{% endif %}>Title</option>
-            <option value="author" {% if sort_by == 'author' %}selected{% endif %}>Author</option>
-        </select>
+            <label for="sort_by">Sort by:</label>
+            <select name="sort_by" id="sort_by" onchange="this.form.submit()">
+                <option value="title" {% if sort_by == 'title' %}selected{% endif %}>Title</option>
+                <option value="author" {% if sort_by == 'author' %}selected{% endif %}>Author</option>
+            </select>
 
-        <button type="submit">Search</button>
-    </form>
+            <button type="submit" class="search-button">Search</button>
+        </form>
 
-    <div>
-        {% if books %}
-            {% for book in books %}
-                <div style="display: flex; align-items: center; margin-bottom: 20px;">
-                    <img src="{{ book.cover_image_url }}" alt="Book cover"
-                         style="width: 100px; height: auto; margin-right: 20px;">
-                    <div>
-                        <h3>{{ book.title }}</h3>
-                        <p>by {{ book.author.name }}</p>
+        <div class="book-list">
+            {% if books %}
+                {% for book in books %}
+                    <div class="book-item">
+                        <img src="{{ book.cover_image_url }}" alt="Book cover" class="book-cover">
+                        <div class="book-info">
+                            <h3 class="book-title">{{ book.title }}</h3>
+                            <p class="book-author">by {{ book.author.name }}</p>
+                            <form action="{{ url_for('delete_book', book_id=book.id) }}" method="POST">
+                                <button type="submit" class="delete-button">Delete Book</button>
+                            </form>
+                        </div>
                     </div>
-                </div>
-            {% endfor %}
-        {% else %}
-            <p>No books found matching your search criteria.</p>
-        {% endif %}
+                {% endfor %}
+            {% else %}
+                <p class="no-books-message">No books found matching your search criteria.</p>
+            {% endif %}
+        </div>
     </div>
 </body>
 </html>
